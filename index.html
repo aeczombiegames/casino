@@ -1,0 +1,55 @@
+import random
+
+# Define the slot machine symbols and payouts
+symbols = ['🍒', '🍋', '🍇', '🍉', '🔔', 'BAR', 'JACKPOT']
+payouts = {
+    '🍒': 10,
+    '🍋': 20,
+    '🍇': 30,
+    '🍉': 40,
+    '🔔': 50,
+    'BAR': 100,
+    'JACKPOT': 500
+}
+
+def spin_slot_machine():
+    # Simulate spinning the 3 reels
+    reel1 = random.choice(symbols)
+    reel2 = random.choice(symbols)
+    reel3 = random.choice(symbols)
+    
+    return reel1, reel2, reel3
+
+def calculate_payout(reels):
+    # Check if all three symbols match
+    if reels[0] == reels[1] == reels[2]:
+        return payouts[reels[0]]
+    else:
+        return 0
+
+def slot_machine_game():
+    print("Welcome to the Slot Machine!")
+    
+    # Get the user's bet
+    bet = int(input("Place your bet (in coins): "))
+    
+    # Spin the slot machine
+    reels = spin_slot_machine()
+    print(f"Spinning... {reels[0]} | {reels[1]} | {reels[2]}")
+    
+    # Calculate the payout
+    payout = calculate_payout(reels)
+    
+    # Show the result
+    if payout > 0:
+        print(f"Congratulations! You won {payout} coins!")
+        total = bet + payout
+    else:
+        print("Sorry, no win this time.")
+        total = bet - bet  # Loss all coins if no win
+    
+    print(f"Total coins: {total}")
+    return total
+
+# Run the game
+slot_machine_game()
